@@ -3,6 +3,17 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        //come back to this later
+      },
+      js: {
+        src: ['public/client/*.js','app/**/*.js'],
+        dest: 'public/dist/js'
+      },
+      css: {
+        src: ['public/*.css'],
+        dest: 'public/dist/css'
+      }
     },
 
     mochaTest: {
@@ -24,12 +35,13 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: [
-        // Add filespec list here
-      ],
+      files: [ 'Gruntfile.js','public/client/*.js','lib/*.js','test/*.js','server.js','./*.js','app/**/*.js'],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
+        unused: true,
+        funcscope: true,
+        maxparams:3,
         ignores: [
           'public/lib/**/*.js',
           'public/dist/**/*.js'
@@ -91,6 +103,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'jshint',
     'mochaTest'
   ]);
 
