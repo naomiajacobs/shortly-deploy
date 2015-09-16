@@ -7,8 +7,12 @@ module.exports = function(grunt) {
         //come back to this later
       },
       js: {
-        src: ['public/client/*.js','app/**/*.js'],
-        dest: 'public/dist/js'
+        src: ['public/client/*.js'],
+        dest: 'public/dist/client.js'
+      },
+      lib: {
+        src: ['public/lib/*.js'],
+        dest: 'public/dist/lib.js'
       },
       css: {
         src: ['public/*.css'],
@@ -32,6 +36,17 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        //come back to this later?
+      },
+      js: {
+        src: ['public/dist/client.js'],
+        dest: 'public/dist/client_minify.js'
+      },
+      lib: {
+        src: ['public/lib/*.js'],
+        dest: 'public/dist/lib_minify.js'
+      }
     },
 
     jshint: {
@@ -50,7 +65,13 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add filespec list here
+        options: {
+          //come back later?
+        },
+        css: {
+          src: ['public/dist/css'],
+          dest: 'public/dist/minify.css'
+        }
     },
 
     watch: {
@@ -108,6 +129,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
