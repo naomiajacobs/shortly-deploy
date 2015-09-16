@@ -4,14 +4,17 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
-        //come back to this later
+        separator: ';'
       },
       js: {
         src: ['public/client/*.js'],
         dest: 'public/dist/client.js'
       },
       lib: {
-        src: ['public/lib/*.js'],
+        src: ['public/lib/jquery.js',
+        'public/lib/underscore.js',
+        'public/lib/backbone.js',
+        'public/lib/handlebars.js'],
         dest: 'public/dist/lib.js'
       },
       css: {
@@ -44,7 +47,7 @@ module.exports = function(grunt) {
         dest: 'public/dist/client_minify.js'
       },
       lib: {
-        src: ['public/lib/*.js'],
+        src: ['public/dist/lib.js'],
         dest: 'public/dist/lib_minify.js'
       }
     },
@@ -77,8 +80,11 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
+          'Gruntfile.js',
           'public/client/**/*.js',
           'public/lib/**/*.js',
+          'views/**/*.ejs',
+
         ],
         tasks: [
           'concat',
