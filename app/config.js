@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+var location = process.env.PORT ? 'mongodb://MongoLabShortly:Hf70WiO5lMqftsTwDawtkn9KdZKpGP8yEiXROX05zrE-@ds042698.mongolab.com:42698/MongoLabShortly' : 'mongodb://localhost/test';
+
+mongoose.connect(location);
 
 var Links = mongoose.Schema({
   url: String,
